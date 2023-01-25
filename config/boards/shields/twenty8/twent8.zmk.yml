@@ -1,0 +1,10 @@
+file_format: "1"
+id: twenty8
+name: _Twenty8
+type: shield
+requires: [pro_micro]
+features:
+  - keys
+siblings:
+  - twenty8_left
+  - twenty8_right
