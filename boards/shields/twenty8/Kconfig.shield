@@ -1,5 +1,0 @@
-config SHIELD_TWENTY8_LEFT
-	def_bool $(shields_list_contains,twenty8_left)
-
-config SHIELD_TWENTY8_RIGHT
-	def_bool $(shields_list_contains,twenty8_right)
