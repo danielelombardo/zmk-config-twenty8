@@ -1,102 +1,160 @@
-/*
- * Copyright (c) 2022 The ZMK Contributors
- *
- * SPDX-License-Identifier: MIT
- */
-
 #include <behaviors.dtsi>
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
+#define MG(layer) &mg layer layer
+#define abc_shft &mrl RSHIFT 0
+#define ARCHIVE &kp LC(LS(1))
+#define TEAMSMUTE &kp LC(SPACE)
 
-&mt {
-  //  flavor = "tap-preferred";
-   // tapping_term_ms = <200>;
+&caps_word {
+    continue-list = <MINUS UNDERSCORE BKSP DEL LEFT RIGHT>;
 };
 
 / { 
+    behaviors {
+        mg: mom_toggle_layers {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MOM_TOGGLE_LAYERS";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&mo>, <&tog>;
+        };
+        hm: home_mod_both {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOME_MOD_BOTH";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <300>;
+            quick-tap-ms = <200>;
+            global-quick-tap;
+            bindings = <&kp>, <&kp>;
+        };
+        hl: mode_mod_left {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOME_MOD_LEFT";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <300>;
+            quick-tap-ms = <200>;
+            global-quick-tap;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <3 4 5 11 12 13 14 15 21 22 23 24 25 26 27>
+        };
+        hr: mode_mod_right {
+            compatible = "zmk,behavior-hold-tap";
+            label = "HOME_MOD_RIGHT";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <300>;
+            quick-tap-ms = <200>;
+            global-quick-tap;
+            bindings = <&kp>, <&kp>;
+            hold-trigger-key-positions = <0 1 2 6 7 8 9 10 16 17 18 19 20 26 27>
+        };
+        mrl: mod-reset-layers {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MOD_RESET_LAYERS";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&to>;
+        };
+    };
 
     combos {
         compatible = "zmk,combos";
-        combo_esc {
-            timeout-ms = <50>;
+        combo_minus {
+            timeout-ms = <30>;
+            key-positions = <1 2>;
+            bindings = <&kp MINUS>;
+            layers = <0 2>
+        };
+        combo_sqt {
+            timeout-ms = <30>;
             key-positions = <0 1>;
-            bindings = <&kp ESC>;
+            bindings = <&kp SQT>;
+            layers = <0 2>
         };
-        
-         combo_tab {
+        combo_slash {
             timeout-ms = <50>;
-            key-positions = <10 11>;
-            bindings = <&kp TAB>;
+            key-positions = <9 10>;
+            bindings = <&kp SLASH>;
+            layers = <0 2>
         };
-        
-            combo_ralt {
+        combo_equal {
             timeout-ms = <50>;
-            key-positions = <17 16>;
-            bindings = <&kp RALT>;
+            key-positions = <8 9>;
+            bindings = <&kp EQUAL>;
+            layers = <0 2>
         };
-        
-                    combo_lalt {
-            timeout-ms = <50>;
-            key-positions = <11 12>;
-            bindings = <&kp LALT>;
+        combo_dot {
+            timeout-ms = <30>;
+            key-positions = <3 4>;
+            bindings = <&kp DOT>;
+            layers = <0 2>
         };
-        
-                           combo_lgui {
+        combo_semi {
+            timeout-ms = <30>;
+            key-positions = <4 5>;
+            bindings = <&kp SEMI>;
+            layers = <0>
+        };
+        combo_comma {
             timeout-ms = <50>;
             key-positions = <12 13>;
-            bindings = <&kp LGUI>;
+            bindings = <&kp TAB>;
+            layers = <0 2>
         };
-        
-        
-       combo_rgui {
-            timeout-ms = <50>;
-            key-positions = <17 18>;
-            bindings = <&kp RGUI>;
+        combo_fun {
+            timeout-ms = <30>;
+            key-positions = <11 12 13>;
+            bindings = <&tog 3>;
         };
-        
 
-        
     };
 
-        keymap {
-                compatible = "zmk,keymap";
-                
-       		default_layer {
-		bindings = <
-		&kp Q &kp W &kp E &kp R &kp T 						&kp Y &kp U  &kp I    &kp O   &kp P 
-		&kp A &kp S &kp D &kp F &kp G 			        	        &kp H &kp J &kp K &kp L &kp QUOT
-		&mt LSFT Z &kp X &kp C &kp V &kp B				        &kp N &kp M  &kp CMMA &kp DOT &mt LSFT RET
-          				&mo 1 &kp LCTL  				&kp SPC &mo 2 
-		>;
-		};
+    keymap {
+        compatible = "zmk,keymap";
+        //       0  1  2    3  4  5  
+        // 6  7  8  9  10   11 12 13 14 15
+        // 16 17 18 19 20   21 22 23 24 25
+        //             26   27
+        abc {
+            bindings = <
+                                  &hl LWIN W  &hl LALT E  &hl LCTL R  &hr RCTL U  &hr RALT I  &hr RWIN O    
+                &kp Q    &kp A    &kp S       &kp D       &kp F       &kp H       &kp N       &kp L      &kp P    &kp K    
+                &kp Z    &kp T    &kp X       &kp C       &kp V       &kp B       &kp G       &kp M      &kp Y    &kp J
+                                                          MG(1)       &hm RSHIFT SPACE
+            >;
+        };
 
-       		left_layer {
-		bindings = <
-		&kp NUM_1  &kp NUM_2    &kp NUM_3    &kp NUM_4    &kp NUM_5		&kp NUM_6 &kp NUM_7 &kp NUM_8 &kp NUM_9 &kp NUM_0 
-		&kp TAB    &kp LC(S)    &kp DQT      &kp PIPE2     &kp HASH 		&kp MINUS &kp EQL  &kp LBKT &kp RBKT  &kp DEL 
-		&kp ESC    &kp TILDE 	&kp NON_US_BSLH &kp NON_US_HASH  &kp TILDE2 	&kp MINUS &kp GRAVE &kp LBKT &kp RBKT  &kp DEL 
-					    &mo 1  &kp LGUI  					&kp RGUI &mo 2 
-		>;
-		};
-		
-		right_layer {
-		bindings = <
-		&kp BANG  &kp ATSN &kp HASH  &kp DLLR  &kp PRCT    			&kp CRRT  &kp AMPS &kp KMLT &kp LPRN &kp RPRN 
-		&kp HASH  &kp QMARK  &kp FSLH  &kp COLN  &kp SCLN 			&kp MINUS &kp KP_EQUAL  &kp LBRC  &kp RBRC   &kp BKSP
-		&kp LSFT  &kp KPLS &kp LBKT &kp RBKT   &kp BSLH    			&kp UNDER &kp LEFT &kp DOWN &kp UP  &kp RIGHT
-					  &mo 3 &kp LCTL  				&kp SPC  &mo 2 
-		>;
-		};	
-		
-		tri_layer {
-		bindings = <
-		&kp NUM_1  &kp NUM_2    &kp NUM_3    &kp NUM_4    &kp NUM_5 			&trans &trans   &trans   &trans  &trans
-		&kp F1 &kp F2 &kp F3 &kp F4 &kp F5  						&trans &kp PG_UP  &kp K_VOL_UP &kp K_MUTE &trans 
-		&bt BT_CLR  &bt BT_NXT &bt BT_PRV &kp F6 &kp F7   				&trans &kp PG_DN  &kp K_VOL_DN  &trans &trans   
-					 &trans &trans  					&trans &trans 
-		>;
-		};	
-        
-	};
+        nav {
+            bindings = <
+                                    &caps_word  &kp LC(C)  &kp LC(V)  &kp LEFT   &kp UP    &kp RIGHT 
+                &kp ESC  &kp ENTER  &kt LSHFT   &kt LALT   &kt LCTRL  &kp HOME   &kp DOWN  &kp END   &kp BKSP  ARCHIVE    
+                &none    &kp TAB    &kp LC(Z)   &kp LC(Y)  &kp LC(X)  &kp LA(N4) &kp PG_UP &kp PG_DN &kp DEL   &none 
+                                                           MG(2)      abc_shft
+            >;
+        };
+    
+        num {
+            bindings = <
+                                  &hl LWIN N3  &hl LALT N2  &hl LCTL N1  &hr RCTL N6  &hr RALT N7  &hr RWIN N8    
+                &kp ENTER &kp N4  &kp LBKT     &kp RBKT     &kp UNDER    &kp PIPE     &kp AMPS     &kp STAR     &kp N9  &kp BKSP
+                &none     &kp N5  &kp PSCRN    &none        TEAMSMUTE    &kp BSLH     &kp GRAVE    &kp TILDE    &kp N0  &none
+                                                            MG(3)        abc_shft
+            >;
+        };    
+    
+        fun {
+            bindings = <
+                                   &kp F3  &kp F2  &kp F1       &kp F6       &kp F7       &kp F8    
+                &bt BT_NXT &kp F4  &none   &kp F12 &kp F11      &kp C_VOL_UP &kp C_VOL_DN &kp C_MUTE  &kp F9  &none
+                &bt BT_CLR &kp F5  &none   &none   &bootloader  &kp C_BRI_UP &kp C_BRI_DN &none       &kp F10 &bootloader
+                                                   &mrl LALT 0  abc_shft
+            >;
+        };
+    };
 };
