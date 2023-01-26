@@ -5,7 +5,7 @@
 #define MG(layer) &mg layer layer
 #define abc_shft &mrl RSHIFT 0
 #define ARCHIVE &kp LC(LS(1))
-#define TEAMSMUTE &kp LC(SPACE)
+#define TEAMSMUTE &kp LC(LS(M))
 
 &caps_word {
     continue-list = <MINUS UNDERSCORE BKSP DEL LEFT RIGHT>;
@@ -20,6 +20,14 @@
             flavor = "hold-preferred";
             tapping-term-ms = <200>;
             bindings = <&mo>, <&tog>;
+        };
+        mrl: mod-reset-layers {
+            compatible = "zmk,behavior-hold-tap";
+            label = "MOD_RESET_LAYERS";
+            #binding-cells = <2>;
+            flavor = "hold-preferred";
+            tapping-term-ms = <200>;
+            bindings = <&kp>, <&to>;
         };
         hm: home_mod_both {
             compatible = "zmk,behavior-hold-tap";
@@ -53,66 +61,28 @@
             bindings = <&kp>, <&kp>;
             hold-trigger-key-positions = <0 1 2 6 7 8 9 10 16 17 18 19 20 26 27>;
         };
-        mrl: mod-reset-layers {
-            compatible = "zmk,behavior-hold-tap";
-            label = "MOD_RESET_LAYERS";
-            #binding-cells = <2>;
-            flavor = "hold-preferred";
-            tapping-term-ms = <200>;
-            bindings = <&kp>, <&to>;
-        };
     };
 
     combos {
         compatible = "zmk,combos";
-        combo_minus {
-            timeout-ms = <30>;
-            key-positions = <1 2>;
-            bindings = <&kp MINUS>;
-            layers = <0 2>;
-        };
-        combo_sqt {
-            timeout-ms = <30>;
-            key-positions = <0 1>;
-            bindings = <&kp SQT>;
-            layers = <0 2>;
-        };
-        combo_slash {
+        combo_sys_sticky {
             timeout-ms = <50>;
-            key-positions = <9 10>;
-            bindings = <&kp SLASH>;
+            key-positions = <11 12>;
+            bindings = <&sl 3>;
             layers = <0 2>;
         };
-        combo_equal {
+        combo_sys {
             timeout-ms = <50>;
-            key-positions = <8 9>;
-            bindings = <&kp EQUAL>;
+            key-positions = <11 13>;
+            bindings = <&tog 3>;
             layers = <0 2>;
         };
-        combo_dot {
-            timeout-ms = <30>;
-            key-positions = <3 4>;
-            bindings = <&kp DOT>;
-            layers = <0 2>;
-        };
-        combo_semi {
-            timeout-ms = <30>;
-            key-positions = <4 5>;
-            bindings = <&kp SEMI>;
-            layers = <0>;
-        };
-        combo_comma {
+        combo_num_sticky {
             timeout-ms = <50>;
             key-positions = <12 13>;
-            bindings = <&kp TAB>;
-            layers = <0 2>;
+            bindings = <&sl 2>;
+            layers = <0>;
         };
-        combo_fun {
-            timeout-ms = <30>;
-            key-positions = <11 12 13>;
-            bindings = <&tog 3>;
-        };
-
     };
 
     keymap {
@@ -134,7 +104,7 @@
             bindings = <
                                     &caps_word  &kp LC(C)  &kp LC(V)  &kp LEFT   &kp UP    &kp RIGHT 
                 &kp ESC  &kp ENTER  &kt LSHFT   &kt LALT   &kt LCTRL  &kp HOME   &kp DOWN  &kp END   &kp BKSP  ARCHIVE    
-                &none    &kp TAB    &kp LC(Z)   &kp LC(Y)  &kp LC(X)  &kp LA(N4) &kp PG_UP &kp PG_DN &kp DEL   &none 
+                &none    &kp TAB    &kp LC(Z)   &kp LC(Y)  &kp LC(X)  &kp LA(N4) &kp PG_UP &kp PG_DN &kp DEL   TEAMSMUTE
                                                            MG(2)      abc_shft
             >;
         };
@@ -142,18 +112,18 @@
         num {
             bindings = <
                                   &hl LWIN N3  &hl LALT N2  &hl LCTL N1  &hr RCTL N6  &hr RALT N7  &hr RWIN N8    
-                &kp ENTER &kp N4  &kp LBKT     &kp RBKT     &kp UNDER    &kp PIPE     &kp AMPS     &kp STAR     &kp N9  &kp BKSP
-                &none     &kp N5  &kp PSCRN    &none        TEAMSMUTE    &kp BSLH     &kp GRAVE    &kp TILDE    &kp N0  &none
-                                                            MG(3)        abc_shft
+                &kp ENTER &kp N4  &kp F3       &kp F2       &kp F1       &kp F7       &kp F8       &kp F9      &kp N9  &kp BKSP
+                &none     &kp N5  &kp F6       &kp F5       &kp F4       &kp F10      &kp F11      &kp F12     &kp N0  &none
+                                                            &mrl LALT 0  abc_shft
             >;
         };    
     
-        fun {
+        sym {
             bindings = <
-                                   &kp F3  &kp F2  &kp F1       &kp F6       &kp F7       &kp F8    
-                &bt BT_NXT &kp F4  &none   &kp F12 &kp F11      &kp C_VOL_UP &kp C_VOL_DN &kp C_MUTE  &kp F9  &none
-                &bt BT_CLR &kp F5  &none   &none   &bootloader  &kp C_BRI_UP &kp C_BRI_DN &none       &kp F10 &bootloader
-                                                   &mrl LALT 0  abc_shft
+                                        &kp DOT    &kp SQT   &kp MINUS    &kp C_BRI_UP  &kp C_VOL_UP  &kp C_MUTE  
+                &none        &kp SLASH  &kp COMMA  &kp LBKT  &kp SEMI     &kp C_BRI_DN  &kp C_VOL_DN  &none      &bt BT_NXT  &none
+                &bootloader  &kp BSLH   &kp GRAVE  &kp RBKT  &none        &none         &none         &none      &bt BT_CLR  &bootloader
+                                                             &mrl LCTL 0  abc_shft
             >;
         };
     };
