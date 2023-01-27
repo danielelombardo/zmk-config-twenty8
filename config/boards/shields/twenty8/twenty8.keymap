@@ -2,9 +2,8 @@
 #include <dt-bindings/zmk/keys.h>
 #include <dt-bindings/zmk/bt.h>
 
-#define MG(layer) &mg layer layer
 #define abc_shft &mrl RSHIFT 0
-#define ARCHIVE &kp LC(LS(1))
+#define ARCHIVE &kp LC(LS(N1))
 #define TEAMSMUTE &kp LC(LS(M))
 
 &caps_word {
@@ -18,7 +17,7 @@
             label = "MOM_TOGGLE_LAYERS";
             #binding-cells = <2>;
             flavor = "hold-preferred";
-            tapping-term-ms = <200>;
+            tapping-term-ms = <150>;
             bindings = <&mo>, <&tog>;
         };
         mrl: mod-reset-layers {
@@ -26,7 +25,7 @@
             label = "MOD_RESET_LAYERS";
             #binding-cells = <2>;
             flavor = "hold-preferred";
-            tapping-term-ms = <200>;
+            tapping-term-ms = <150>;
             bindings = <&kp>, <&to>;
         };
         hm: home_mod_both {
@@ -66,25 +65,37 @@
     combos {
         compatible = "zmk,combos";
         combo_sys_sticky {
-            timeout-ms = <50>;
+            timeout-ms = <70>;
             key-positions = <11 12>;
             bindings = <&sl 3>;
             layers = <0 2>;
         };
         combo_sys {
-            timeout-ms = <50>;
+            timeout-ms = <70>;
             key-positions = <11 13>;
             bindings = <&tog 3>;
             layers = <0 2>;
         };
         combo_num_sticky {
-            timeout-ms = <50>;
+            timeout-ms = <70>;
             key-positions = <12 13>;
             bindings = <&sl 2>;
             layers = <0>;
         };
+        combo_backspace {
+            timeout-ms = <70>;
+            key-positions = <22 23>;
+            bindings = <&kp BKSP>;
+            layers = <0>;
+        };
+        combo_enter {
+            timeout-ms = <70>;
+            key-positions = <18 19>;
+            bindings = <&kp ENTER>;
+            layers = <0>;
+        };
     };
-
+ 
     keymap {
         compatible = "zmk,keymap";
         //       0  1  2    3  4  5  
@@ -93,36 +104,36 @@
         //             26   27
         abc {
             bindings = <
-                                  &hl LWIN W  &hl LALT E  &hl LCTL R  &hr RCTL U  &hr RALT I  &hr RWIN O    
-                &kp Q    &kp A    &kp S       &kp D       &kp F       &kp H       &kp N       &kp L      &kp P    &kp K    
-                &kp Z    &kp T    &kp X       &kp C       &kp V       &kp B       &kp G       &kp M      &kp Y    &kp J
-                                                          MG(1)       &hm RSHIFT SPACE
+                                  &hl LWIN W  &hl LALT E  &hl LCTL R  &hr RCTL U  &hr RALT I  &hr RWIN O
+                &kp Q    &kp A    &kp S       &kp D       &kp F       &kp H       &kp N       &kp L      &kp P    &kp J
+                &kp Z    &kp T    &kp X       &kp C       &kp V       &kp B       &kp M       &kp G      &kp Y    &kp K
+                                                          &mg 1 1     &hm RSHIFT SPACE
             >;
         };
 
         nav {
             bindings = <
-                                    &caps_word  &kp LC(C)  &kp LC(V)  &kp LEFT   &kp UP    &kp RIGHT 
-                &kp ESC  &kp ENTER  &kt LSHFT   &kt LALT   &kt LCTRL  &kp HOME   &kp DOWN  &kp END   &kp BKSP  ARCHIVE    
-                &none    &kp TAB    &kp LC(Z)   &kp LC(Y)  &kp LC(X)  &kp LA(N4) &kp PG_UP &kp PG_DN &kp DEL   TEAMSMUTE
-                                                           MG(2)      abc_shft
+                                    &caps_word  &kp LC(C)  &kp LC(V)  &kp HOME   &kp UP    &kp END  
+                &kp ESC  &kp ENTER  &kt LSHFT   &kt LALT   &kt LCTRL  &kp LEFT   &kp DOWN  &kp RIGHT &kp BKSP  ARCHIVE 
+                &none    &kp TAB    &kp LC(X)   &kp LC(Z)  &kp LC(Y)  &kp LA(F4) &kp PG_UP &kp PG_DN &kp DEL   TEAMSMUTE
+                                                           &tog 2     abc_shft
             >;
         };
     
         num {
             bindings = <
-                                  &hl LWIN N3  &hl LALT N2  &hl LCTL N1  &hr RCTL N6  &hr RALT N7  &hr RWIN N8    
+                                  &hl LWIN N3  &hl LALT N2  &hl LCTL N1  &hr RCTL N6  &hr RALT N7  &hr RWIN N8
                 &kp ENTER &kp N4  &kp F3       &kp F2       &kp F1       &kp F7       &kp F8       &kp F9      &kp N9  &kp BKSP
                 &none     &kp N5  &kp F6       &kp F5       &kp F4       &kp F10      &kp F11      &kp F12     &kp N0  &none
-                                                            &mrl LALT 0  abc_shft
+                                                            &to 0        abc_shft
             >;
         };    
     
         sym {
             bindings = <
-                                        &kp DOT    &kp SQT   &kp MINUS    &kp C_BRI_UP  &kp C_VOL_UP  &kp C_MUTE  
-                &none        &kp SLASH  &kp COMMA  &kp LBKT  &kp SEMI     &kp C_BRI_DN  &kp C_VOL_DN  &none      &bt BT_NXT  &none
-                &bootloader  &kp BSLH   &kp GRAVE  &kp RBKT  &none        &none         &none         &none      &bt BT_CLR  &bootloader
+                                        &kp DOT    &kp SQT   &kp MINUS    &kp C_BRI_UP  &kp C_VOL_UP  &kp C_MUTE
+                &none        &kp SLASH  &kp COMMA  &kp SEMI  &kp EQUAL    &kp C_BRI_DN  &kp C_VOL_DN  &none      &bt BT_NXT  &none
+                &bootloader  &kp BSLH   &kp LBKT   &kp RBKT  &kp GRAVE    &none         &none         &none      &bt BT_CLR  &bootloader
                                                              &mrl LCTL 0  abc_shft
             >;
         };
