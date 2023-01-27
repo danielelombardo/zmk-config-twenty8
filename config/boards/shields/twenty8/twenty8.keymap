@@ -16,16 +16,16 @@
             compatible = "zmk,behavior-hold-tap";
             label = "MOM_TOGGLE_LAYERS";
             #binding-cells = <2>;
-            flavor = "hold-preferred";
-            tapping-term-ms = <150>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
             bindings = <&mo>, <&tog>;
         };
         mrl: mod-reset-layers {
             compatible = "zmk,behavior-hold-tap";
             label = "MOD_RESET_LAYERS";
             #binding-cells = <2>;
-            flavor = "hold-preferred";
-            tapping-term-ms = <150>;
+            flavor = "tap-preferred";
+            tapping-term-ms = <200>;
             bindings = <&kp>, <&to>;
         };
         hm: home_mod_both {
