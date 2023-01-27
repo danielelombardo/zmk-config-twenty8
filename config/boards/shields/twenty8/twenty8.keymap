@@ -105,8 +105,8 @@
         abc {
             bindings = <
                                   &hl LWIN W  &hl LALT E  &hl LCTL R  &hr RCTL U  &hr RALT I  &hr RWIN O
-                &kp Q    &kp A    &kp S       &kp D       &kp F       &kp H       &kp N       &kp L      &kp P    &kp J
-                &kp Z    &kp T    &kp X       &kp C       &kp V       &kp B       &kp M       &kp G      &kp Y    &kp K
+                &kp Q    &kp A    &kp S       &kp D       &kp T       &kp H       &kp N       &kp L      &kp P    &kp J
+                &kp Z    &kp X    &kp C       &kp V       &kp F       &kp B       &kp M       &kp G      &kp Y    &kp K
                                                           &mg 1 1     &hm RSHIFT SPACE
             >;
         };
