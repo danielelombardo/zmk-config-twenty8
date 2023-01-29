@@ -17,7 +17,7 @@
             label = "MOM_TOGGLE_LAYERS";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <200>;
+            tapping-term-ms = <300>;
             bindings = <&mo>, <&tog>;
         };
         mrl: mod-reset-layers {
@@ -25,7 +25,7 @@
             label = "MOD_RESET_LAYERS";
             #binding-cells = <2>;
             flavor = "tap-preferred";
-            tapping-term-ms = <200>;
+            tapping-term-ms = <300>;
             bindings = <&kp>, <&to>;
         };
         hm: home_mod_both {
@@ -66,31 +66,31 @@
         compatible = "zmk,combos";
         combo_sys_sticky {
             timeout-ms = <70>;
-            key-positions = <11 12>;
+            key-positions = <3 4>;
             bindings = <&sl 3>;
             layers = <0 2>;
         };
         combo_sys {
             timeout-ms = <70>;
-            key-positions = <11 13>;
+            key-positions = <3 5>;
             bindings = <&tog 3>;
             layers = <0 2>;
         };
         combo_num_sticky {
             timeout-ms = <70>;
-            key-positions = <12 13>;
+            key-positions = <1 2>;
             bindings = <&sl 2>;
             layers = <0>;
         };
         combo_backspace {
             timeout-ms = <70>;
-            key-positions = <22 23>;
+            key-positions = <4 5>;
             bindings = <&kp BKSP>;
             layers = <0>;
         };
         combo_enter {
             timeout-ms = <70>;
-            key-positions = <18 19>;
+            key-positions = <0 1>;
             bindings = <&kp ENTER>;
             layers = <0>;
         };
@@ -104,9 +104,9 @@
         //             26   27
         abc {
             bindings = <
-                                  &hl LWIN W  &hl LALT E  &hl LCTL R  &hr RCTL U  &hr RALT I  &hr RWIN O
-                &kp Q    &kp A    &kp S       &kp D       &kp T       &kp H       &kp N       &kp L      &kp P    &kp J
-                &kp Z    &kp X    &kp C       &kp V       &kp F       &kp B       &kp M       &kp G      &kp Y    &kp K
+                                  &kp W       &kp E       &kp R       &kp U       &kp I       &kp O
+                &kp Q    &kp A    &hl LWIN S  &hl LALT D  &hl LCTL T  &hr RCTL H  &hr RALT N  &hr RWIN L  &kp P    &kp J
+                &kp Z    &kp X    &kp C       &kp V       &kp F       &kp B       &kp M       &kp G       &kp Y    &kp K
                                                           &mg 1 1     &hm RSHIFT SPACE
             >;
         };
@@ -122,8 +122,8 @@
     
         num {
             bindings = <
-                                  &hl LWIN N3  &hl LALT N2  &hl LCTL N1  &hr RCTL N6  &hr RALT N7  &hr RWIN N8
-                &kp ENTER &kp N4  &kp F3       &kp F2       &kp F1       &kp F7       &kp F8       &kp F9      &kp N9  &kp BKSP
+                                  &kp N3       &kp N2       &kp N1       &kp N6       &kp N        &kp 7N8
+                &kp ENTER &kp N4  &hl LWIN F3  &hl LALT F2  &hl LCTL F1  &hr RCTL F7  &hr RALT F8  &hr RWIN F9 &kp N9  &kp BKSP
                 &none     &kp N5  &kp F6       &kp F5       &kp F4       &kp F10      &kp F11      &kp F12     &kp N0  &none
                                                             &to 0        abc_shft
             >;
@@ -131,10 +131,10 @@
     
         sym {
             bindings = <
-                                        &kp DOT    &kp SQT   &kp MINUS    &kp C_BRI_UP  &kp C_VOL_UP  &kp C_MUTE
-                &none        &kp SLASH  &kp COMMA  &kp SEMI  &kp EQUAL    &kp C_BRI_DN  &kp C_VOL_DN  &none      &bt BT_NXT  &none
-                &bootloader  &kp BSLH   &kp LBKT   &kp RBKT  &kp GRAVE    &none         &none         &none      &bt BT_CLR  &bootloader
-                                                             &mrl LCTL 0  abc_shft
+                                         &kp SEMI    &kp COMMA     &kp DOT       &kp MINUS  &kp SQT   &kp EQUAL
+                &none        &bt BT_NXT  &kp C_MUTE  &kp C_BRI_UP  &kp C_VOL_UP  &kp LBKT   &kp RBKT  &kp BSLH  &kp SLASH &none
+                &bootloader  &bt BT_CLR  &none       &kp C_BRI_DN  &kp C_VOL_DN  &none      &none     &none     &kp GRAVE &bootloader
+                                                                   &mrl LCTL 0   abc_shft
             >;
         };
     };
