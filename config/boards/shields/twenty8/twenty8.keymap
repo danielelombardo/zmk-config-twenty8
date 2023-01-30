@@ -60,28 +60,43 @@
             bindings = <&kp>, <&kp>;
             hold-trigger-key-positions = <0 1 2 6 7 8 9 10 16 17 18 19 20 26 27>;
         };
+        slh: sticky_layer_hold {
+            compatible = "zmk,behavior-hold-tap";
+            label = "STICKY_LAYER_HOLD";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <300>;
+            quick-tap-ms = <200>;
+            global-quick-tap;
+            bindings = <&sl>, <&kp>;
+        };
+        togh: toggle_layer_hold {
+            compatible = "zmk,behavior-hold-tap";
+            label = "TOGGLE_LAYER_HOLD";
+            #binding-cells = <2>;
+            flavor = "balanced";
+            tapping-term-ms = <300>;
+            quick-tap-ms = <200>;
+            global-quick-tap;
+            bindings = <&tog>, <&kp>;
+        };
     };
-
+    macros {
+        rls_mods: rls_mods {
+            label = "ZM_rls_mods";
+            compatible = "zmk,behavior-macro";
+            #binding-cells = <0>;
+            wait-ms = <10>;
+            bindings
+                = <&macro_release &kp LSHFT>
+                , <&macro_release &kp LCTRL>
+                , <&macro_release &kp LALT>
+                , <&macro_release &kp LWIN>
+                ;
+        };
+    };
     combos {
         compatible = "zmk,combos";
-        combo_sys_sticky {
-            timeout-ms = <70>;
-            key-positions = <3 4>;
-            bindings = <&sl 3>;
-            layers = <0 2>;
-        };
-        combo_sys {
-            timeout-ms = <70>;
-            key-positions = <3 5>;
-            bindings = <&tog 3>;
-            layers = <0 2>;
-        };
-        combo_num_sticky {
-            timeout-ms = <70>;
-            key-positions = <1 2>;
-            bindings = <&sl 2>;
-            layers = <0>;
-        };
         combo_backspace {
             timeout-ms = <70>;
             key-positions = <4 5>;
@@ -104,7 +119,7 @@
         //             26   27
         abc {
             bindings = <
-                                  &kp W       &kp E       &kp R       &kp U       &kp I       &kp O
+                                  &kp W       &kp E       &slh 2 R    &slh 3 U    &kp I       &tog 0 O
                 &kp Q    &kp A    &hl LWIN S  &hl LALT D  &hl LCTL T  &hr RCTL H  &hr RALT N  &hr RWIN L  &kp P    &kp J
                 &kp Z    &kp X    &kp C       &kp V       &kp F       &kp B       &kp M       &kp G       &kp Y    &kp K
                                                           &mg 1 1     &hm RSHIFT SPACE
@@ -113,9 +128,9 @@
 
         nav {
             bindings = <
-                                    &caps_word  &kp LC(C)  &kp LC(V)  &kp HOME   &kp UP    &kp END  
-                &kp ESC  &kp ENTER  &kt LSHFT   &kt LALT   &kt LCTRL  &kp LEFT   &kp DOWN  &kp RIGHT &kp BKSP  ARCHIVE 
-                &none    &kp TAB    &kp LC(X)   &kp LC(Z)  &kp LC(Y)  &kp LA(F4) &kp PG_UP &kp PG_DN &kp DEL   TEAMSMUTE
+                                      &caps_word  &kp LC(C)  &kp LC(V)  &kp HOME   &kp UP    &kp END  
+                &kp ESC    &kp ENTER  &kt LSHFT   &kt LALT   &kt LCTRL  &kp LEFT   &kp DOWN  &kp RIGHT &kp BKSP  ARCHIVE 
+                &rls_mods  &kp TAB    &kp LC(X)   &kp LC(Z)  &kp LC(Y)  &kp LA(F4) &kp PG_UP &kp PG_DN &kp DEL   TEAMSMUTE
                                                            &tog 2     abc_shft
             >;
         };
