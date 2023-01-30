@@ -86,12 +86,10 @@
             label = "ZM_rls_mods";
             compatible = "zmk,behavior-macro";
             #binding-cells = <0>;
-            wait-ms = <10>;
+            wait-ms = <5>;
+            tap-ms = <15>;
             bindings
-                = <&macro_release &kp LSHFT>
-                , <&macro_release &kp LCTRL>
-                , <&macro_release &kp LALT>
-                , <&macro_release &kp LWIN>
+                = <&macro_tap &kp LSHFT &kp LCTRL &kp LALT &kp LWIN>
                 ;
         };
     };
