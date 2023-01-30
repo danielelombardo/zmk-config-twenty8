@@ -115,7 +115,7 @@
         //             26   27
         abc {
             bindings = <
-                                  &kp W       &kp E       &slh 2 R    &slh 3 U    &kp I       &tog 0 O
+                                  &kp W       &kp E       &slh 2 R    &slh 3 U    &kp I       &togh 0 O
                 &kp Q    &kp A    &hl LWIN S  &hl LALT D  &hl LCTL T  &hr RCTL H  &hr RALT N  &hr RWIN L  &kp P    &kp J
                 &kp Z    &kp X    &kp C       &kp V       &kp F       &kp B       &kp M       &kp G       &kp Y    &kp K
                                                           &mg 1 1     &hm RSHIFT SPACE
