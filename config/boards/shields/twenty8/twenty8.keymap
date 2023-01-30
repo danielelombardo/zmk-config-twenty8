@@ -80,9 +80,11 @@
             global-quick-tap;
             bindings = <&tog>, <&kp>;
         };
+    };
+    macros {
         rls_mods: rls_mods {
-            label = "ZM_rls_mods";
             compatible = "zmk,behavior-macro";
+            label = "ZM_rls_mods";
             #binding-cells = <0>;
             wait-ms = <5>;
             tap-ms = <15>;
