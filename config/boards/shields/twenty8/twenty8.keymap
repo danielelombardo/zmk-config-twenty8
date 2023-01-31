@@ -112,7 +112,7 @@
         nav {
             bindings = <
                                       &caps_word  &kp LC(C)  &kp LC(V)  &kp HOME  &kp UP    &kp END  
-                &kp ESC    &kp ENTER  &kt LSHFT   &kt LALT   &kt LCTRL  &kp LEFT  &kp DOWN  &kp RIGHT &kp BKSP  ARCHIVE &tog 3 
+                &kp ESC    &kp ENTER  &kt LSHFT   &kt LALT   &kt LCTRL  &kp LEFT  &kp DOWN  &kp RIGHT &kp BKSP  ARCHIVE
                 &rls_mods  &kp TAB    &kp LC(X)   &kp LC(Z)  &kp LC(Y)  &kp INS   &kp PG_UP &kp PG_DN &kp DEL   &kp LA(F4)
                                                              &tog 2     abc_shft
             >;
