@@ -38,37 +38,15 @@
             global-quick-tap;
             bindings = <&mo>, <&kp>;
         };        
-        hm: home_mod_both {
+        hm: home_mod {
             compatible = "zmk,behavior-hold-tap";
-            label = "HOME_MOD_BOTH";
+            label = "HOME_MOD";
             #binding-cells = <2>;
             flavor = "balanced";
             tapping-term-ms = <300>;
             quick-tap-ms = <200>;
             global-quick-tap;
             bindings = <&kp>, <&kp>;
-        };
-        hl: mode_mod_left {
-            compatible = "zmk,behavior-hold-tap";
-            label = "HOME_MOD_LEFT";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <300>;
-            quick-tap-ms = <200>;
-            global-quick-tap;
-            bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = <3 4 5 11 12 13 14 15 21 22 23 24 25 26 27>;
-        };
-        hr: mode_mod_right {
-            compatible = "zmk,behavior-hold-tap";
-            label = "HOME_MOD_RIGHT";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <300>;
-            quick-tap-ms = <200>;
-            global-quick-tap;
-            bindings = <&kp>, <&kp>;
-            hold-trigger-key-positions = <0 1 2 6 7 8 9 10 16 17 18 19 20 26 27>;
         };
     };
     macros {
@@ -106,7 +84,7 @@
         abc {
             bindings = <
                                    &kp W       &kp E       &kp R       &kp U       &kp I       &kp O
-                &kp Q    &mkp 3 A  &hl LGUI S  &hl LALT D  &hl LCTL T  &hr RCTL H  &hr RALT N  &hr RGUI L  &mkp 3 P  &kp J
+                &kp Q    &mkp 3 A  &hm LGUI S  &hm LALT D  &hm LCTL T  &hm RCTL H  &hm RALT N  &hm RGUI L  &mkp 3 P  &kp J
                 &kp Z    &kp X     &kp C       &kp V       &kp F       &kp B       &kp M       &kp G       &kp Y     &kp K
                                                            &mg 1 1     &hm RSHIFT SPACE
             >;
@@ -123,9 +101,9 @@
     
         num {
             bindings = <
-                                       &kp N3  &kp N2       &kp N1       &kp N6       &kp N7       &kp N8
-                &kp ENTER &hl LGUI N4  &kp F3  &hl LALT F2  &hl LCTL F1  &hr RCTL F7  &hr RALT F8  &kp F9   &hr RGUI N9  &kp BKSP
-                &none     &kp N5       &kp F6  &kp F5       &kp F4       &kp F10      &kp F11      &kp F12  &kp N0       &none
+                                  &kp N3       &kp N2       &kp N1       &kp N6       &kp N7       &kp N8
+                &kp ENTER &kp N4  &hm LGUI F3  &hm LALT F2  &hm LCTL F1  &hm RCTL F7  &hm RALT F8  &hm RGUI F9  &kp N9  &kp BKSP
+                &none     &kp N5  &kp F6       &kp F5       &kp F4       &kp F10      &kp F11      &kp F12      &kp N0  &none
                                                             &tog 3       abc_shft
             >;
         };    
