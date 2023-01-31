@@ -60,25 +60,12 @@
             bindings = <&kp>, <&kp>;
             hold-trigger-key-positions = <0 1 2 6 7 8 9 10 16 17 18 19 20 26 27>;
         };
-        slh: sticky_layer_hold {
-            compatible = "zmk,behavior-hold-tap";
-            label = "STICKY_LAYER_HOLD";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <300>;
-            quick-tap-ms = <200>;
-            global-quick-tap;
-            bindings = <&sl>, <&kp>;
-        };
-        togh: toggle_layer_hold {
-            compatible = "zmk,behavior-hold-tap";
-            label = "TOGGLE_LAYER_HOLD";
-            #binding-cells = <2>;
-            flavor = "balanced";
-            tapping-term-ms = <300>;
-            quick-tap-ms = <200>;
-            global-quick-tap;
-            bindings = <&tog>, <&kp>;
+        sym_o: sym_toggle_o {
+            compatible = "zmk,behavior-mod-morph";
+            label = "SYM_TOGGLE_O";
+            #binding-cells = <0>;
+            bindings = <&kp O>, <&tog 3>;
+            mods = <(MOD_LGUI|MOD_RGUI)>;
         };
     };
     macros {
@@ -88,7 +75,7 @@
             #binding-cells = <0>;
             wait-ms = <5>;
             tap-ms = <15>;
-            bindings = <&macro_tap &kp LSHFT &kp LCTRL &kp LALT &kp LWIN>;
+            bindings = <&macro_release &kp LSHFT &kp LCTRL &kp LALT &kp LGUI>;
         };
     };
     combos {
@@ -115,28 +102,28 @@
         //             26   27
         abc {
             bindings = <
-                                  &kp W       &kp E       &slh 2 R    &slh 3 U    &kp I       &togh 0 O
-                &kp Q    &kp A    &hl LWIN S  &hl LALT D  &hl LCTL T  &hr RCTL H  &hr RALT N  &hr RWIN L  &kp P    &kp J
-                &kp Z    &kp X    &kp C       &kp V       &kp F       &kp B       &kp M       &kp G       &kp Y    &kp K
+                                     &kp W  &kp E       &kp R       &kp U       &kp I       &sym_o
+                &kp Q    &hl LGUI A  &kp S  &hl LALT D  &hl LCTL T  &hr RCTL H  &hr RALT N  &kp L   &hr RGUI P  &kp J
+                &kp Z    &kp X       &kp C  &kp V       &kp F       &kp B       &kp M       &kp G   &kp Y       &kp K
                                                           &mg 1 1     &hm RSHIFT SPACE
             >;
         };
 
         nav {
             bindings = <
-                                      &caps_word  &kp LC(C)  &kp LC(V)  &kp HOME   &kp UP    &kp END  
-                &kp ESC    &kp ENTER  &kt LSHFT   &kt LALT   &kt LCTRL  &kp LEFT   &kp DOWN  &kp RIGHT &kp BKSP  ARCHIVE 
-                &rls_mods  &kp TAB    &kp LC(X)   &kp LC(Z)  &kp LC(Y)  &kp LA(F4) &kp PG_UP &kp PG_DN &kp DEL   TEAMSMUTE
-                                                           &tog 2     abc_shft
+                                      &caps_word  &kp LC(C)  &kp LC(V)  &kp HOME  &kp UP    &kp END  
+                &kp ESC    &kp ENTER  &kt LSHFT   &kt LALT   &kt LCTRL  &kp LEFT  &kp DOWN  &kp RIGHT &kp BKSP  ARCHIVE &tog 3 
+                &rls_mods  &kp TAB    &kp LC(X)   &kp LC(Z)  &kp LC(Y)  &kp INS   &kp PG_UP &kp PG_DN &kp DEL   &kp LA(F4)
+                                                             &tog 2     abc_shft
             >;
         };
     
         num {
             bindings = <
-                                  &kp N3       &kp N2       &kp N1       &kp N6       &kp N7       &kp N8
-                &kp ENTER &kp N4  &hl LWIN F3  &hl LALT F2  &hl LCTL F1  &hr RCTL F7  &hr RALT F8  &hr RWIN F9 &kp N9  &kp BKSP
-                &none     &kp N5  &kp F6       &kp F5       &kp F4       &kp F10      &kp F11      &kp F12     &kp N0  &none
-                                                            &to 0        abc_shft
+                                       &kp N3  &kp N2       &kp N1       &kp N6       &kp N7       &kp N8
+                &kp ENTER &hl LGUI N4  &kp F3  &hl LALT F2  &hl LCTL F1  &hr RCTL F7  &hr RALT F8  &kp F9   &hr RGUI N9  &kp BKSP
+                &none     &kp N5       &kp F6  &kp F5       &kp F4       &kp F10      &kp F11      &kp F12  &kp N0       &none
+                                                            &tog 3       abc_shft
             >;
         };    
     
